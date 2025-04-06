@@ -1,15 +1,39 @@
-name: Website Visit Workflow
+name: Daily Website Visit
 
 on:
   workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: '*/10 * * * *'  # 每10分钟执行一次
+    - cron: '0 22,7 * * *'  # 每天 6 点和 15 点（UTC 时间）
 
 jobs:
-  visit_website:
+  visit_websites:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Visit website
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Visit first website (wujin)
         run: |
           curl -s -o /dev/null https://ys.vlmee.dpdns.org/api.php/timming/index.html?enforce=1&name=wujin
+
+      - name: Wait for 5 minutes
+        run: sleep 300  # 暂停 5 分钟（300 秒）
+
+      - name: Visit second website (heimuer)
+        run: |
+          curl -s -o /dev/null https://ys.vlmee.dpdns.org/api.php/timming/index.html?enforce=1&name=heimuer
+
+      - name: Wait for 5 minutes
+        run: sleep 300  # 暂停 5 分钟（300 秒）
+
+      - name: Visit third website (huawei)
+        run: |
+          curl -s -o /dev/null https://ys.vlmee.dpdns.org/api.php/timming/index.html?enforce=1&name=huawei
+
+      - name: Wait for 5 minutes
+        run: sleep 300  # 暂停 5 分钟（300 秒）
+
+      - name: Visit fourth website (hongniu)
+        run: |
+          curl -s -o /dev/null https://ys.vlmee.dpdns.org/api.php/timming/index.html?enforce=1&name=hongniu
