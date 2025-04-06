@@ -1,0 +1,13 @@
+name: 定期访问网站
+
+on:
+  schedule:
+    - cron: '0 0 8 * *'  # 每小时执行一次
+
+jobs:
+  visit_website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 访问网站
+        run: |
+          curl -s https://ys.vlmee.dpdns.org/api.php/timming/index.html?enforce=1&name=wujin > /dev/null
